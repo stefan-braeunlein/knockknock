@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Knock Knock Widget — Demo</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 60px 40px;
+      background: #f9fafb;
+      color: #374151;
+    }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    p { color: #6b7280; max-width: 480px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h1>Beispiel-Unternehmensseite</h1>
+  <p>Dies ist eine Demo-Seite, die zeigt, wie das Knock Knock Widget auf einer beliebigen Website eingebettet werden kann. Klicke auf den blauen Button unten rechts.</p>
+
+  <!-- Knock Knock Widget — embed snippet -->
+  <!-- data-endpoint: URL to POST form data to (omit for demo/offline mode) -->
+  <!-- data-company: company identifier sent with each submission -->
+  <script src="knock-knock.js" data-company="knockknock" data-endpoint="http://localhost:5118/api/apply"></script>
+</body>
+</html>

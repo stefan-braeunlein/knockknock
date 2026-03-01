@@ -1,0 +1,482 @@
+/* Knock Knock Widget — Scoped styles (all prefixed .kk-) */
+
+/* ── Self-hosted Open Sans (GDPR-compliant) ────────────── */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/open-sans-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/open-sans-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/open-sans-600-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/open-sans-600-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/open-sans-700-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/open-sans-700-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ── Reset & Base ───────────────────────────────────────── */
+.kk-widget {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  z-index: 99998;
+}
+
+.kk-widget *,
+.kk-widget *::before,
+.kk-widget *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.4;
+}
+
+/* ── FAB (Floating Action Button) ───────────────────────── */
+.kk-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  transition: transform 0.2s ease;
+  z-index: 99998;
+  padding: 0;
+  overflow: visible;
+}
+
+.kk-fab:hover {
+  transform: scale(1.08);
+  box-shadow: none;
+}
+
+.kk-fab svg {
+  width: 60px;
+  height: 60px;
+}
+
+/* ── Hand states: open hand ↔ fist crossfade ───────────── */
+.kk-hand-open {
+  transition: opacity 0.2s ease;
+}
+
+.kk-hand-fist {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.kk-fab.kk-morphed .kk-hand-open {
+  opacity: 0;
+}
+
+.kk-fab.kk-morphed .kk-hand-fist {
+  opacity: 1;
+}
+
+/* Impact lines hidden by default */
+.kk-impact {
+  opacity: 0;
+}
+
+/* Impact lines flash in sync with knocks */
+@keyframes kk-impact-flash {
+  0%   { opacity: 0; }
+  12%  { opacity: 0; }
+  15%  { opacity: 1; }
+  38%  { opacity: 1; }
+  42%  { opacity: 0; }
+  48%  { opacity: 0; }
+  51%  { opacity: 1; }
+  74%  { opacity: 1; }
+  78%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.kk-fab.kk-knocking .kk-impact {
+  animation: kk-impact-flash 0.5s ease;
+}
+
+/* ── Knock animation: subtle shake + hit the screen ────── */
+@keyframes kk-knock {
+  0%   { transform: translateY(0); }
+  12%  { transform: translateY(3px); }
+  18%  { transform: translateY(-5px) scale(1.06); }
+  26%  { transform: translateY(1px) scale(1); }
+  38%  { transform: translateY(0); }
+  48%  { transform: translateY(3px); }
+  54%  { transform: translateY(-5px) scale(1.06); }
+  62%  { transform: translateY(1px) scale(1); }
+  74%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+
+.kk-fab.kk-knocking {
+  animation: kk-knock 0.5s ease;
+}
+
+/* ── Dialog Overlay ─────────────────────────────────────── */
+.kk-overlay {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  z-index: 99999;
+  opacity: 0;
+  transform: translateY(16px) scale(0.96);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.kk-overlay.kk-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* ── Dialog Card ────────────────────────────────────────── */
+.kk-card {
+  width: 390px;
+  background: #f1f5ff;
+  border-radius: 15px;
+  box-shadow: none;
+  padding: 28px 30px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Close Button ───────────────────────────────────────── */
+.kk-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #4b5563;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.kk-close:hover {
+  background: #374151;
+}
+
+.kk-close svg {
+  width: 12px;
+  height: 12px;
+  stroke: #ffffff;
+  stroke-width: 2.5;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+.kk-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0b56cf;
+  margin-bottom: 8px;
+}
+
+.kk-subtitle {
+  font-size: 17px;
+  color: #535d7f;
+  margin-bottom: 20px;
+  line-height: 25px;
+}
+
+/* ── Sections ───────────────────────────────────────────── */
+.kk-section-label {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0b56cf;
+  line-height: 23px;
+  margin-bottom: 8px;
+}
+
+/* ── Inputs ─────────────────────────────────────────────── */
+.kk-input {
+  width: 100%;
+  height: 36px;
+  border: none;
+  border-radius: 18px;
+  padding: 0 16px;
+  font-size: 15px;
+  color: #1f2937;
+  background: #ffffff;
+  outline: none;
+  box-shadow: none;
+  /* U-shaped border: bottom + partial sides via gradient mask */
+  background-image: linear-gradient(#ffffff, #ffffff),
+    linear-gradient(to top, #4a86e8 0%, #4a86e8 15%, transparent 35%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 1.5px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.kk-input::placeholder {
+  color: #9ca3af;
+}
+
+.kk-input:focus {
+  background-image: linear-gradient(#ffffff, #ffffff),
+    linear-gradient(to top, #0b56cf 0%, #0b56cf 15%, transparent 35%);
+}
+
+/* ── Divider text ("oder") ──────────────────────────────── */
+.kk-divider {
+  font-size: 17px;
+  color: #6b7280;
+  margin: 10px 0;
+}
+
+/* ── Upload link ────────────────────────────────────────── */
+.kk-upload-label {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0b56cf;
+  margin-bottom: 6px;
+}
+
+.kk-upload-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  color: #6b7280;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: color 0.15s ease;
+}
+
+.kk-upload-link:hover {
+  color: #1a56db;
+}
+
+.kk-upload-link svg {
+  width: 10px;
+  height: 13px;
+  fill: currentColor;
+}
+
+.kk-upload-filename {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #0b56cf;
+  background: #dbe5ff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.kk-upload-filename.kk-visible {
+  display: inline-flex;
+}
+
+.kk-upload-filename span {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kk-upload-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #6b7280;
+  padding: 0;
+  line-height: 1;
+}
+
+.kk-upload-remove:hover {
+  color: #dc2626;
+}
+
+/* ── Contact section ────────────────────────────────────── */
+/* ── Input error state ──────────────────────────────────── */
+.kk-input.kk-error {
+  border-color: #dc2626;
+}
+
+.kk-error-msg {
+  font-size: 13px;
+  color: #dc2626;
+  margin-top: 4px;
+  display: none;
+}
+
+.kk-error-msg.kk-visible {
+  display: block;
+}
+
+/* ── Contact section ────────────────────────────────────── */
+.kk-contact-label {
+  font-size: 17px;
+  color: #374151;
+  margin-top: 16px;
+  margin-bottom: 10px;
+}
+
+.kk-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.kk-row .kk-input {
+  flex: 1;
+}
+
+.kk-field {
+  margin-bottom: 10px;
+}
+
+/* ── Submit Button ──────────────────────────────────────── */
+.kk-submit-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+  margin-right: -14px;
+}
+
+.kk-submit {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #1a56db;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.kk-submit:hover {
+  background: #1648c0;
+  transform: scale(1.05);
+}
+
+.kk-submit svg {
+  width: 22px;
+  height: 22px;
+  fill: #ffffff;
+  transform: rotate(-40deg) translate(3px, 0px);
+}
+
+.kk-submit:disabled {
+  background: #a0b4e0;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+.kk-footer {
+  border-top: 1px solid #c5cde0;
+  margin: 16px -30px 0;
+  padding: 12px 30px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.kk-footer strong {
+  color: #374151;
+  font-weight: 600;
+}
+
+/* ── Success State ──────────────────────────────────────── */
+.kk-success {
+  display: none;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.kk-success.kk-visible {
+  display: block;
+}
+
+.kk-form.kk-hidden {
+  display: none;
+}
+
+.kk-success-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a56db;
+  margin-bottom: 12px;
+}
+
+.kk-success-text {
+  font-size: 17px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 440px) {
+  .kk-overlay {
+    right: 8px;
+    left: 8px;
+    bottom: 88px;
+  }
+
+  .kk-card {
+    width: 100%;
+  }
+}

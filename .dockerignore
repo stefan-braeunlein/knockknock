@@ -1,0 +1,9 @@
+**/node_modules
+**/bin
+**/obj
+**/.nuxt
+**/.output
+**/dist
+.git
+docs
+*.md

@@ -1,0 +1,31 @@
+# ── SensorHub ──────────────────────────────────────────────
+sensorhub.digital {
+	reverse_proxy frontend:3000
+}
+
+api.sensorhub.digital {
+	reverse_proxy api:8080
+}
+
+auth.sensorhub.digital {
+	reverse_proxy keycloak:8080
+}
+
+# ── KnockKnock ─────────────────────────────────────────────
+getknocknock.de {
+	# Widget static files
+	handle_path /widget/* {
+		root * /srv/widget
+		file_server
+	}
+
+	# API reverse proxy
+	handle /api/* {
+		reverse_proxy kk-api:8080
+	}
+
+	# Admin SPA (catch-all)
+	handle {
+		reverse_proxy kk-admin:80
+	}
+}

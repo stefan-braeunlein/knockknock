@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { apiFetch } = useApi()
-const config = useRuntimeConfig()
 
 interface Applicant {
   id: string
@@ -36,8 +35,9 @@ function formatDate(iso: string) {
   }) + ' Uhr'
 }
 
-function cvUrl(id: string) {
-  return `${config.public.apiBase}/api/applicants/${id}/cv`
+async function openCv(id: string) {
+  const { url } = await apiFetch<{ url: string }>(`/api/applicants/${id}/cv`)
+  window.open(url, '_blank')
 }
 </script>
 
@@ -71,9 +71,9 @@ function cvUrl(id: string) {
               </a>
             </td>
             <td class="py-3">
-              <a v-if="a.hasCv" :href="cvUrl(a.id)" target="_blank" class="text-blue-600 font-semibold hover:underline">
+              <button v-if="a.hasCv" class="text-blue-600 font-semibold hover:underline" @click="openCv(a.id)">
                 Lebenslauf anschauen
-              </a>
+              </button>
             </td>
           </tr>
         </tbody>

@@ -62,6 +62,6 @@ public static class ApplicantEndpoints
             return Results.NotFound(new { error = "No CV uploaded" });
 
         var url = storage.GetPresignedUrl(applicant.CvStorageKey);
-        return Results.Redirect(url);
+        return Results.Ok(new { url });
     }
 }

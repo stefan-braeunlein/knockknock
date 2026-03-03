@@ -47,39 +47,33 @@ async function openCv(id: string) {
 
     <div v-for="[month, items] in grouped" :key="month" class="mb-8">
       <h2 class="text-base font-medium text-gray-600 mb-3">{{ month }}</h2>
-      <div class="overflow-hidden rounded-lg">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="text-left text-gray-500">
-              <th class="py-3 px-4 font-medium">Datum</th>
-              <th class="py-3 px-4 font-medium">Vorname</th>
-              <th class="py-3 px-4 font-medium">Nachname</th>
-              <th class="py-3 px-4 font-medium">Einsatzbereich</th>
-              <th class="py-3 px-4 font-medium">LinkedIn</th>
-              <th class="py-3 px-4 font-medium">Lebenslauf</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="a in items" :key="a.id"
-              class="bg-blue-50/60 border-b border-white"
-              :class="{ 'opacity-60': !a.emailConfirmed }">
-              <td class="py-3 px-4">{{ formatDate(a.createdAt) }}</td>
-              <td class="py-3 px-4">{{ a.firstName }}</td>
-              <td class="py-3 px-4">{{ a.lastName }}</td>
-              <td class="py-3 px-4">{{ a.areaOfWork }}</td>
-              <td class="py-3 px-4">
-                <a v-if="a.linkedinUrl" :href="a.linkedinUrl" target="_blank" class="text-blue-600 font-semibold hover:underline">
-                  Profil anschauen
-                </a>
-              </td>
-              <td class="py-3 px-4">
-                <button v-if="a.hasCv" class="text-blue-600 font-semibold hover:underline" @click="openCv(a.id)">
-                  Lebenslauf anschauen
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="grid grid-cols-6 text-sm text-gray-500 px-4 mb-1">
+        <span class="font-medium">Datum</span>
+        <span class="font-medium">Vorname</span>
+        <span class="font-medium">Nachname</span>
+        <span class="font-medium">Einsatzbereich</span>
+        <span class="font-medium">LinkedIn</span>
+        <span class="font-medium">Lebenslauf</span>
+      </div>
+      <div class="space-y-2">
+        <div v-for="a in items" :key="a.id"
+          class="grid grid-cols-6 items-center text-sm bg-[#F1F5FF] rounded-full px-6 py-3"
+          :class="{ 'opacity-60': !a.emailConfirmed }">
+          <span>{{ formatDate(a.createdAt) }}</span>
+          <span>{{ a.firstName }}</span>
+          <span>{{ a.lastName }}</span>
+          <span>{{ a.areaOfWork }}</span>
+          <span>
+            <a v-if="a.linkedinUrl" :href="a.linkedinUrl" target="_blank" class="text-blue-600 font-semibold hover:underline">
+              Profil anschauen
+            </a>
+          </span>
+          <span>
+            <button v-if="a.hasCv" class="text-blue-600 font-semibold hover:underline" @click="openCv(a.id)">
+              Lebenslauf anschauen
+            </button>
+          </span>
+        </div>
       </div>
     </div>
 

@@ -28,7 +28,7 @@ async function handleLogin() {
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#F5F5F5] flex items-center justify-center">
+  <div class="min-h-screen bg-[#F1F5FF] flex items-center justify-center">
     <div class="bg-white rounded-2xl shadow-sm p-10 w-full max-w-sm">
       <div class="text-center mb-8">
         <h1 class="text-2xl font-bold text-blue-900">Knock Knock</h1>

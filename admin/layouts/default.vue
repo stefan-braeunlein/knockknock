@@ -3,9 +3,9 @@ const { isSuperAdmin, logout } = useAuth()
 </script>
 
 <template>
-  <div class="min-h-screen flex bg-[#F5F5F5]">
+  <div class="min-h-screen flex bg-[#F1F5FF]">
     <!-- Sidebar -->
-    <aside class="w-72 bg-white rounded-2xl m-4 p-6 flex flex-col shadow-sm">
+    <aside class="w-72 bg-[#F1F5FF] p-6 flex flex-col min-h-screen">
       <div class="text-center mb-8">
         <div class="w-20 h-20 mx-auto mb-3">
           <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
@@ -65,7 +65,7 @@ const { isSuperAdmin, logout } = useAuth()
     </aside>
 
     <!-- Main content -->
-    <main class="flex-1 p-8">
+    <main class="flex-1 p-8 bg-white min-h-screen">
       <slot />
     </main>
   </div>

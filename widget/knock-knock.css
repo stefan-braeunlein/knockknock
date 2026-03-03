@@ -50,6 +50,8 @@
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
+/* ── Design tokens (resolved at build time by build.js) ── */
+
 /* ── Reset & Base ───────────────────────────────────────── */
 .kk-widget {
   position: fixed;
@@ -101,12 +103,15 @@
   height: 60px;
 }
 
-/* ── Hand states: open hand ↔ fist crossfade ───────────── */
+/* ── Icon states: "please knock" ↔ "knock knock" crossfade ── */
 .kk-hand-open {
   transition: opacity 0.2s ease;
 }
 
 .kk-hand-fist {
+  position: absolute;
+  top: 0;
+  left: 0;
   opacity: 0;
   transition: opacity 0.2s ease;
 }
@@ -117,29 +122,6 @@
 
 .kk-fab.kk-morphed .kk-hand-fist {
   opacity: 1;
-}
-
-/* Impact lines hidden by default */
-.kk-impact {
-  opacity: 0;
-}
-
-/* Impact lines flash in sync with knocks */
-@keyframes kk-impact-flash {
-  0%   { opacity: 0; }
-  12%  { opacity: 0; }
-  15%  { opacity: 1; }
-  38%  { opacity: 1; }
-  42%  { opacity: 0; }
-  48%  { opacity: 0; }
-  51%  { opacity: 1; }
-  74%  { opacity: 1; }
-  78%  { opacity: 0; }
-  100% { opacity: 0; }
-}
-
-.kk-fab.kk-knocking .kk-impact {
-  animation: kk-impact-flash 0.5s ease;
 }
 
 /* ── Knock animation: subtle shake + hit the screen ────── */
@@ -181,7 +163,7 @@
 /* ── Dialog Card ────────────────────────────────────────── */
 .kk-card {
   width: 390px;
-  background: #f1f5ff;
+  background: var(--kk-blue-light);
   border-radius: 15px;
   box-shadow: none;
   padding: 28px 30px 20px;
@@ -221,7 +203,7 @@
 .kk-title {
   font-size: 28px;
   font-weight: 700;
-  color: #0b56cf;
+  color: var(--kk-blue);
   margin-bottom: 8px;
 }
 
@@ -236,7 +218,7 @@
 .kk-section-label {
   font-size: 17px;
   font-weight: 700;
-  color: #0b56cf;
+  color: var(--kk-blue);
   line-height: 23px;
   margin-bottom: 8px;
 }
@@ -255,7 +237,7 @@
   box-shadow: none;
   /* U-shaped border: bottom + partial sides via gradient mask */
   background-image: linear-gradient(#ffffff, #ffffff),
-    linear-gradient(to top, #4a86e8 0%, #4a86e8 15%, transparent 35%);
+    linear-gradient(to top, var(--kk-blue-light) 0%, var(--kk-blue-light) 15%, transparent 35%);
   background-origin: border-box;
   background-clip: padding-box, border-box;
   border: 1.5px solid transparent;
@@ -268,7 +250,7 @@
 
 .kk-input:focus {
   background-image: linear-gradient(#ffffff, #ffffff),
-    linear-gradient(to top, #0b56cf 0%, #0b56cf 15%, transparent 35%);
+    linear-gradient(to top, var(--kk-blue) 0%, var(--kk-blue) 15%, transparent 35%);
 }
 
 /* ── Divider text ("oder") ──────────────────────────────── */
@@ -282,7 +264,7 @@
 .kk-upload-label {
   font-size: 17px;
   font-weight: 700;
-  color: #0b56cf;
+  color: var(--kk-blue);
   margin-bottom: 6px;
 }
 
@@ -300,7 +282,7 @@
 }
 
 .kk-upload-link:hover {
-  color: #1a56db;
+  color: var(--kk-blue);
 }
 
 .kk-upload-link svg {
@@ -315,8 +297,8 @@
   gap: 6px;
   margin-top: 6px;
   font-size: 13px;
-  color: #0b56cf;
-  background: #dbe5ff;
+  color: var(--kk-blue);
+  background: var(--kk-blue-light);
   padding: 4px 10px;
   border-radius: 6px;
   width: fit-content;
@@ -398,7 +380,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: #1a56db;
+  background: var(--kk-blue);
   border: none;
   cursor: pointer;
   display: flex;
@@ -408,7 +390,7 @@
 }
 
 .kk-submit:hover {
-  background: #1648c0;
+  background: var(--kk-blue);
   transform: scale(1.05);
 }
 
@@ -420,14 +402,14 @@
 }
 
 .kk-submit:disabled {
-  background: #a0b4e0;
+  background: var(--kk-blue-light);
   cursor: not-allowed;
   transform: none;
 }
 
 /* ── Footer ─────────────────────────────────────────────── */
 .kk-footer {
-  border-top: 1px solid #c5cde0;
+  border-top: 1px solid var(--kk-blue-light);
   margin: 16px -30px 0;
   padding: 12px 30px 0;
   text-align: center;
@@ -443,7 +425,7 @@
 /* ── Success State ──────────────────────────────────────── */
 .kk-success {
   display: none;
-  text-align: center;
+  text-align: left;
   padding: 40px 20px;
 }
 
@@ -458,7 +440,7 @@
 .kk-success-title {
   font-size: 24px;
   font-weight: 700;
-  color: #1a56db;
+  color: var(--kk-blue);
   margin-bottom: 12px;
 }
 
@@ -466,6 +448,11 @@
   font-size: 17px;
   color: #6b7280;
   line-height: 1.6;
+}
+
+.kk-highlight {
+  color: var(--kk-blue);
+  font-weight: 700;
 }
 
 /* ── Responsive ─────────────────────────────────────────── */

@@ -35,3 +35,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+.playwright-mcp
+knock-knock.min.js

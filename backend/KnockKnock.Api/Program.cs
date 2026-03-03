@@ -6,6 +6,7 @@ using KnockKnock.Api.Features.Applicants;
 using KnockKnock.Api.Features.Tenants;
 using KnockKnock.Api.Features.Users;
 using KnockKnock.Api.Services;
+using Resend;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -31,7 +32,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 
 builder.Services.AddSingleton<StorageService>();
-builder.Services.AddSingleton<EmailService>();
+builder.Services.AddOptions();
+builder.Services.AddHttpClient<ResendClient>();
+builder.Services.Configure<ResendClientOptions>(o =>
+{
+    o.ApiToken = builder.Configuration["Resend:ApiKey"]!;
+});
+builder.Services.AddTransient<IResend, ResendClient>();
+builder.Services.AddTransient<EmailService>();
 builder.Services.AddCors();
 
 var app = builder.Build();

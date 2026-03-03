@@ -70,9 +70,9 @@ public static class ApplyEndpoints
         db.Applicants.Add(applicant);
         await db.SaveChangesAsync();
 
-        // var baseUrl = config["BaseUrl"]!.TrimEnd('/');
-        // var confirmUrl = $"{baseUrl}/api/confirm/{confirmationToken}";
-        // await email.SendConfirmationEmailAsync(emailAddr, $"{firstName} {lastName}", confirmUrl);
+        var baseUrl = config["BaseUrl"]!.TrimEnd('/');
+        var confirmUrl = $"{baseUrl}/confirm/{confirmationToken}";
+        await email.SendConfirmationEmailAsync(emailAddr, $"{firstName} {lastName}", confirmUrl);
 
         return Results.Ok(new { success = true });
     }

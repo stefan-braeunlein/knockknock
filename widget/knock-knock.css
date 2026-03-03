@@ -248,7 +248,7 @@
   border: none;
   border-radius: 18px;
   padding: 0 16px;
-  font-size: 15px;
+  font-size: 16px;
   color: #1f2937;
   background: #ffffff;
   outline: none;
@@ -469,6 +469,11 @@
 }
 
 /* ── Responsive ─────────────────────────────────────────── */
+.kk-card {
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
 @media (max-width: 440px) {
   .kk-overlay {
     right: 8px;
@@ -478,5 +483,6 @@
 
   .kk-card {
     width: 100%;
+    max-height: calc(100vh - 112px);
   }
 }

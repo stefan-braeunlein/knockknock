@@ -305,4 +305,42 @@
         alert("Etwas ist schiefgelaufen. Bitte versuche es erneut.");
       });
   });
+
+  // ── Keyboard-aware repositioning (mobile) ─────────────
+  if (window.visualViewport) {
+    var cardEl = widget.querySelector(".kk-card");
+
+    function adjustForKeyboard() {
+      var vv = window.visualViewport;
+      var keyboardHeight = window.innerHeight - vv.height - vv.offsetTop;
+
+      if (keyboardHeight > 50) {
+        overlay.style.bottom = keyboardHeight + 8 + "px";
+        cardEl.style.maxHeight = vv.height - 40 + "px";
+      } else {
+        overlay.style.bottom = "";
+        cardEl.style.maxHeight = "";
+      }
+    }
+
+    window.visualViewport.addEventListener("resize", adjustForKeyboard);
+  }
+
+  // ── Scroll focused input into view within card ────────
+  var scrollCard = widget.querySelector(".kk-card");
+  widget.addEventListener(
+    "focus",
+    function (e) {
+      if (e.target.classList.contains("kk-input")) {
+        setTimeout(function () {
+          var inputRect = e.target.getBoundingClientRect();
+          var cardRect = scrollCard.getBoundingClientRect();
+          if (inputRect.bottom > cardRect.bottom - 10) {
+            scrollCard.scrollTop += inputRect.bottom - cardRect.bottom + 40;
+          }
+        }, 350);
+      }
+    },
+    true
+  );
 })();

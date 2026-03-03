@@ -43,41 +43,44 @@ async function openCv(id: string) {
 
 <template>
   <div>
-    <h1 class="text-2xl font-bold text-gray-900 mb-6">Bewerberliste</h1>
+    <h1 class="text-2xl font-bold text-blue-900 mb-6 underline underline-offset-4 decoration-2">Bewerberliste</h1>
 
     <div v-for="[month, items] in grouped" :key="month" class="mb-8">
-      <h2 class="text-lg font-semibold text-gray-700 mb-3">{{ month }}</h2>
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="text-left text-gray-500 border-b">
-            <th class="py-2 font-medium">Datum</th>
-            <th class="py-2 font-medium">Vorname</th>
-            <th class="py-2 font-medium">Nachname</th>
-            <th class="py-2 font-medium">Einsatzbereich</th>
-            <th class="py-2 font-medium">LinkedIn</th>
-            <th class="py-2 font-medium">Lebenslauf</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="a in items" :key="a.id" class="border-b border-gray-100"
-            :class="{ 'opacity-60': !a.emailConfirmed }">
-            <td class="py-3">{{ formatDate(a.createdAt) }}</td>
-            <td class="py-3">{{ a.firstName }}</td>
-            <td class="py-3">{{ a.lastName }}</td>
-            <td class="py-3">{{ a.areaOfWork }}</td>
-            <td class="py-3">
-              <a v-if="a.linkedinUrl" :href="a.linkedinUrl" target="_blank" class="text-blue-600 font-semibold hover:underline">
-                Profil anschauen
-              </a>
-            </td>
-            <td class="py-3">
-              <button v-if="a.hasCv" class="text-blue-600 font-semibold hover:underline" @click="openCv(a.id)">
-                Lebenslauf anschauen
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <h2 class="text-base font-medium text-gray-600 mb-3">{{ month }}</h2>
+      <div class="overflow-hidden rounded-lg">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-left text-gray-500">
+              <th class="py-3 px-4 font-medium">Datum</th>
+              <th class="py-3 px-4 font-medium">Vorname</th>
+              <th class="py-3 px-4 font-medium">Nachname</th>
+              <th class="py-3 px-4 font-medium">Einsatzbereich</th>
+              <th class="py-3 px-4 font-medium">LinkedIn</th>
+              <th class="py-3 px-4 font-medium">Lebenslauf</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="a in items" :key="a.id"
+              class="bg-blue-50/60 border-b border-white"
+              :class="{ 'opacity-60': !a.emailConfirmed }">
+              <td class="py-3 px-4">{{ formatDate(a.createdAt) }}</td>
+              <td class="py-3 px-4">{{ a.firstName }}</td>
+              <td class="py-3 px-4">{{ a.lastName }}</td>
+              <td class="py-3 px-4">{{ a.areaOfWork }}</td>
+              <td class="py-3 px-4">
+                <a v-if="a.linkedinUrl" :href="a.linkedinUrl" target="_blank" class="text-blue-600 font-semibold hover:underline">
+                  Profil anschauen
+                </a>
+              </td>
+              <td class="py-3 px-4">
+                <button v-if="a.hasCv" class="text-blue-600 font-semibold hover:underline" @click="openCv(a.id)">
+                  Lebenslauf anschauen
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <p v-if="!applicants.length" class="text-gray-400">Noch keine Bewerbungen vorhanden.</p>

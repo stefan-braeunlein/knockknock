@@ -5,6 +5,10 @@ export default {
       fontFamily: {
         sans: ['"Open Sans"', 'system-ui', '-apple-system', 'sans-serif'],
       },
+      colors: {
+        brand: '#0B56CF',
+        'brand-light': '#F1F5FF',
+      },
     },
   },
 }

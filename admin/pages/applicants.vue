@@ -43,7 +43,7 @@ async function openCv(id: string) {
 
 <template>
   <div>
-    <h1 class="text-2xl font-bold text-blue-900 mb-6 underline underline-offset-4 decoration-2">Bewerberliste</h1>
+    <h1 class="text-[28px] leading-[38px] font-bold text-brand mb-6 decoration-2">Bewerberliste</h1>
 
     <div v-for="[month, items] in grouped" :key="month" class="mb-8">
       <h2 class="text-base font-medium text-gray-600 mb-3">{{ month }}</h2>
@@ -57,19 +57,19 @@ async function openCv(id: string) {
       </div>
       <div class="space-y-2">
         <div v-for="a in items" :key="a.id"
-          class="grid grid-cols-6 items-center text-sm bg-[#F1F5FF] rounded-full px-6 py-3"
+          class="grid grid-cols-6 items-center text-sm bg-brand-light rounded-full px-6 py-3"
           :class="{ 'opacity-60': !a.emailConfirmed }">
           <span>{{ formatDate(a.createdAt) }}</span>
           <span>{{ a.firstName }}</span>
           <span>{{ a.lastName }}</span>
           <span>{{ a.areaOfWork }}</span>
           <span>
-            <a v-if="a.linkedinUrl" :href="a.linkedinUrl" target="_blank" class="text-blue-600 font-semibold hover:underline">
+            <a v-if="a.linkedinUrl" :href="a.linkedinUrl" target="_blank" class="text-brand font-semibold hover:underline">
               Profil anschauen
             </a>
           </span>
           <span>
-            <button v-if="a.hasCv" class="text-blue-600 font-semibold hover:underline" @click="openCv(a.id)">
+            <button v-if="a.hasCv" class="text-brand font-semibold hover:underline" @click="openCv(a.id)">
               Lebenslauf anschauen
             </button>
           </span>

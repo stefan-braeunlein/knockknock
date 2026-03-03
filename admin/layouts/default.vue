@@ -3,9 +3,9 @@ const { isSuperAdmin, logout } = useAuth()
 </script>
 
 <template>
-  <div class="min-h-screen flex bg-[#F1F5FF]">
+  <div class="min-h-screen flex bg-brand-light">
     <!-- Sidebar -->
-    <aside class="w-72 bg-[#F1F5FF] p-6 flex flex-col min-h-screen">
+    <aside class="w-72 bg-brand-light p-6 flex flex-col min-h-screen">
       <div class="text-center mb-8">
         <div class="w-20 h-20 mx-auto mb-3">
           <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">

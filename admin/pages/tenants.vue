@@ -40,7 +40,7 @@ onMounted(load)
 
 <template>
   <div>
-    <h1 class="text-2xl font-bold text-blue-900 mb-6 underline underline-offset-4 decoration-2">Unternehmen</h1>
+    <h1 class="text-[28px] leading-[38px] font-bold text-brand mb-6 decoration-2">Unternehmen</h1>
 
     <!-- Create form -->
     <form @submit.prevent="create" class="flex gap-3 mb-8">
@@ -48,7 +48,7 @@ onMounted(load)
         class="px-4 py-2 border border-gray-200 rounded-lg flex-1" />
       <input v-model="newSlug" placeholder="Slug (für Widget)" required
         class="px-4 py-2 border border-gray-200 rounded-lg flex-1" />
-      <button type="submit" class="px-6 py-2 bg-[#0B56CF] text-white rounded-lg font-semibold hover:bg-blue-800">
+      <button type="submit" class="px-6 py-2 bg-brand text-white rounded-lg font-semibold hover:bg-blue-800">
         Erstellen
       </button>
     </form>

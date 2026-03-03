@@ -47,7 +47,7 @@ onMounted(load)
 
 <template>
   <div>
-    <h1 class="text-2xl font-bold text-blue-900 mb-6 underline underline-offset-4 decoration-2">Benutzer</h1>
+    <h1 class="text-[28px] leading-[38px] font-bold text-brand mb-6 decoration-2">Benutzer</h1>
 
     <!-- Create form -->
     <form @submit.prevent="create" class="flex flex-wrap gap-3 mb-8">
@@ -64,7 +64,7 @@ onMounted(load)
         <option disabled :value="undefined">Unternehmen wählen...</option>
         <option v-for="t in tenants" :key="t.id" :value="t.id">{{ t.name }}</option>
       </select>
-      <button type="submit" class="px-6 py-2 bg-[#0B56CF] text-white rounded-lg font-semibold hover:bg-blue-800">
+      <button type="submit" class="px-6 py-2 bg-brand text-white rounded-lg font-semibold hover:bg-blue-800">
         Erstellen
       </button>
     </form>

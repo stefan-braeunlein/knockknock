@@ -28,7 +28,7 @@ async function handleLogin() {
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#F1F5FF] flex items-center justify-center">
+  <div class="min-h-screen bg-brand-light flex items-center justify-center">
     <div class="bg-white rounded-2xl shadow-sm p-10 w-full max-w-sm">
       <div class="text-center mb-8">
         <h1 class="text-2xl font-bold text-blue-900">Knock Knock</h1>
@@ -41,7 +41,7 @@ async function handleLogin() {
           class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
         <p v-if="error" class="text-red-500 text-sm">{{ error }}</p>
         <button type="submit" :disabled="loading"
-          class="w-full py-2 bg-[#0B56CF] text-white rounded-lg font-semibold hover:bg-blue-800 disabled:opacity-50">
+          class="w-full py-2 bg-brand text-white rounded-lg font-semibold hover:bg-blue-800 disabled:opacity-50">
           {{ loading ? 'Laden...' : 'Anmelden' }}
         </button>
       </form>

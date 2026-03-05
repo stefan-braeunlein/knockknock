@@ -77,8 +77,8 @@
   position: fixed;
   bottom: 24px;
   right: 24px;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   background: transparent;
   border: none;
@@ -99,28 +99,16 @@
 }
 
 .kk-fab svg {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
 }
 
-/* ── Icon states: "please knock" ↔ "knock knock" crossfade ── */
+/* ── Icon states: only "knock knock" shown ── */
 .kk-hand-open {
-  transition: opacity 0.2s ease;
+  display: none;
 }
 
 .kk-hand-fist {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.kk-fab.kk-morphed .kk-hand-open {
-  opacity: 0;
-}
-
-.kk-fab.kk-morphed .kk-hand-fist {
   opacity: 1;
 }
 
@@ -163,7 +151,7 @@
 /* ── Dialog Card ────────────────────────────────────────── */
 .kk-card {
   width: 390px;
-  background: var(--kk-blue-light);
+  background: #F1F5FF;
   border-radius: 15px;
   box-shadow: none;
   padding: 28px 30px 20px;
@@ -201,14 +189,14 @@
 
 /* ── Header ─────────────────────────────────────────────── */
 .kk-title {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--kk-blue);
   margin-bottom: 8px;
 }
 
 .kk-subtitle {
-  font-size: 17px;
+  font-size: 16px;
   color: #535d7f;
   margin-bottom: 20px;
   line-height: 25px;
@@ -216,7 +204,7 @@
 
 /* ── Sections ───────────────────────────────────────────── */
 .kk-section-label {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--kk-blue);
   line-height: 23px;
@@ -237,7 +225,7 @@
   box-shadow: none;
   /* U-shaped border: bottom + partial sides via gradient mask */
   background-image: linear-gradient(#ffffff, #ffffff),
-    linear-gradient(to top, var(--kk-blue-light) 0%, var(--kk-blue-light) 15%, transparent 35%);
+    linear-gradient(to top, #0B56CF 0%, #0B56CF 15%, transparent 35%);
   background-origin: border-box;
   background-clip: padding-box, border-box;
   border: 1.5px solid transparent;
@@ -255,14 +243,14 @@
 
 /* ── Divider text ("oder") ──────────────────────────────── */
 .kk-divider {
-  font-size: 17px;
+  font-size: 16px;
   color: #6b7280;
   margin: 10px 0;
 }
 
 /* ── Upload link ────────────────────────────────────────── */
 .kk-upload-label {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--kk-blue);
   margin-bottom: 6px;
@@ -348,7 +336,7 @@
 
 /* ── Contact section ────────────────────────────────────── */
 .kk-contact-label {
-  font-size: 17px;
+  font-size: 16px;
   color: #374151;
   margin-top: 16px;
   margin-bottom: 10px;
@@ -402,14 +390,14 @@
 }
 
 .kk-submit:disabled {
-  background: var(--kk-blue-light);
+  background: rgba(83, 93, 127, 0.2);
   cursor: not-allowed;
   transform: none;
 }
 
 /* ── Footer ─────────────────────────────────────────────── */
 .kk-footer {
-  border-top: 1px solid var(--kk-blue-light);
+  border-top: 1px solid rgba(83, 93, 127, 0.2);
   margin: 16px -30px 0;
   padding: 12px 30px 0;
   text-align: center;
@@ -426,7 +414,7 @@
 .kk-success {
   display: none;
   text-align: left;
-  padding: 40px 20px;
+  padding: 0;
 }
 
 .kk-success.kk-visible {
@@ -438,14 +426,14 @@
 }
 
 .kk-success-title {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--kk-blue);
   margin-bottom: 12px;
 }
 
 .kk-success-text {
-  font-size: 17px;
+  font-size: 16px;
   color: #6b7280;
   line-height: 1.6;
 }

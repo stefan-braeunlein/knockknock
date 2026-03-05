@@ -146,23 +146,17 @@
     knockBusy = true;
     resetForm();
 
-    // Step 1: morph hand → fist (0.25s crossfade)
-    fab.classList.add("kk-morphed");
+    // Start knocking animation
+    fab.classList.remove("kk-knocking");
+    void fab.offsetWidth;
+    fab.classList.add("kk-knocking");
 
-    // Step 2: after morph completes, start knocking
+    // After knock animation ends, open dialog
     setTimeout(function () {
       fab.classList.remove("kk-knocking");
-      void fab.offsetWidth;
-      fab.classList.add("kk-knocking");
-    }, 280);
-
-    // Step 3: after knock animation ends, open dialog & reset icon
-    setTimeout(function () {
-      fab.classList.remove("kk-knocking");
-      fab.classList.remove("kk-morphed");
       overlay.classList.add("kk-open");
       knockBusy = false;
-    }, 800);
+    }, 520);
   });
 
   closeBtn.addEventListener("click", function () {

@@ -14,7 +14,8 @@ COPY widget/package.json widget/package-lock.json* ./
 RUN npm install
 
 COPY widget/ .
-RUN node build.js
+COPY admin/public/knock-knock-logo.svg /logo.svg
+RUN KK_LOGO_PATH=/logo.svg node build.js
 
 FROM nginx:alpine
 COPY --from=build-admin /app/.output/public /usr/share/nginx/html

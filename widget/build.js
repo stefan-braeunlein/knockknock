@@ -10,7 +10,8 @@ let js = fs.readFileSync(path.join(DIR, "knock-knock.js"), "utf8");
 let css = fs.readFileSync(path.join(DIR, "knock-knock.css"), "utf8");
 
 // ── 1b. Read and inject SVG icons ───────────────────────────
-const svgLogo = fs.readFileSync(path.join(DIR, "..", "admin", "public", "knock-knock-logo.svg"), "utf8")
+const logoPath = process.env.KK_LOGO_PATH || path.join(DIR, "..", "admin", "public", "knock-knock-logo.svg");
+const svgLogo = fs.readFileSync(logoPath, "utf8")
   .replace(/\n/g, "")
   .replace("<svg ", '<svg class="kk-logo" ');
 

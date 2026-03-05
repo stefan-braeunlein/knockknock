@@ -39,7 +39,7 @@ const { isSuperAdmin, logout } = useAuth()
           Logout
         </button>
         <div class="border-t border-gray-200 mt-4 pt-4">
-          <p class="text-gray-400 text-xs text-center">Powered by <strong class="text-gray-600">Knock Knock HR</strong></p>
+          <p class="text-gray-400 text-base text-center">Powered by <strong class="text-gray-600">Knock Knock HR</strong></p>
         </div>
       </div>
     </aside>

@@ -20,8 +20,7 @@
 
     // FAB – brand icon with "please knock" (default) + "knock knock" (knocking) states
     '  <button class="kk-fab" aria-label="Bewerbung starten">',
-    '    <!--__KK_SVG_DEFAULT__-->',
-    '    <!--__KK_SVG_KNOCK__-->',
+    '    <!--__KK_SVG_LOGO__-->',
     '  </button>',
 
     // Overlay

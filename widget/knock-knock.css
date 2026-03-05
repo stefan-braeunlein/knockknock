@@ -103,14 +103,6 @@
   height: 70px;
 }
 
-/* ── Icon states: only "knock knock" shown ── */
-.kk-hand-open {
-  display: none;
-}
-
-.kk-hand-fist {
-  opacity: 1;
-}
 
 /* ── Knock animation: subtle shake + hit the screen ────── */
 @keyframes kk-knock {

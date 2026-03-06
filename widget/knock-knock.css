@@ -125,7 +125,7 @@
 /* ── Dialog Overlay ─────────────────────────────────────── */
 .kk-overlay {
   position: fixed;
-  bottom: 96px;
+  bottom: 124px;
   right: 24px;
   z-index: 99999;
   opacity: 0;
@@ -437,7 +437,7 @@
 
 /* ── Responsive ─────────────────────────────────────────── */
 .kk-card {
-  max-height: calc(100vh - 120px);
+  max-height: calc(100vh - 148px);
   overflow-y: auto;
 }
 
@@ -445,11 +445,11 @@
   .kk-overlay {
     right: 8px;
     left: 8px;
-    bottom: 88px;
+    bottom: 124px;
   }
 
   .kk-card {
     width: 100%;
-    max-height: calc(100vh - 112px);
+    max-height: calc(100vh - 148px);
   }
 }

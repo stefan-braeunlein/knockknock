@@ -17,12 +17,13 @@ public class EmailService
         _env = env;
     }
 
-    public async Task SendConfirmationEmailAsync(string toEmail, string toName, string confirmUrl)
+    public async Task SendConfirmationEmailAsync(string toEmail, string toName, string confirmUrl, string tenantName)
     {
         var from = $"{_config["Email:FromName"]} <{_config["Email:FromAddress"]}>";
         var subject = "Bitte bestätige deine E-Mail-Adresse";
         var html = $"""
             <p>Hallo {toName},</p>
+            <p>Vielen Dank für deine Bewerbung bei <strong>{tenantName}</strong>.</p>
             <p>Bitte bestätige deine E-Mail-Adresse, indem du auf den folgenden Link klickst:</p>
             <p><a href="{confirmUrl}">{confirmUrl}</a></p>
             <p>Viele Grüße,<br/>Knock Knock HR</p>

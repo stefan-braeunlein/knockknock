@@ -72,7 +72,7 @@ public static class ApplyEndpoints
 
         var baseUrl = config["BaseUrl"]!.TrimEnd('/');
         var confirmUrl = $"{baseUrl}/confirm/{confirmationToken}";
-        await email.SendConfirmationEmailAsync(emailAddr, $"{firstName} {lastName}", confirmUrl);
+        await email.SendConfirmationEmailAsync(emailAddr, $"{firstName} {lastName}", confirmUrl, tenant.Name);
 
         return Results.Ok(new { success = true });
     }

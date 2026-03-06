@@ -47,22 +47,24 @@ async function openCv(id: string) {
 
     <div v-for="[month, items] in grouped" :key="month" class="mb-8">
       <h2 class="text-base font-medium text-gray-600 mb-3">{{ month }}</h2>
-      <div class="grid grid-cols-6 text-sm text-gray-500 px-4 mb-1">
+      <div class="grid grid-cols-7 text-sm text-gray-500 px-4 mb-1">
         <span class="font-medium">Datum</span>
         <span class="font-medium">Vorname</span>
         <span class="font-medium">Nachname</span>
         <span class="font-medium">Tätigkeitsbereich</span>
+        <span class="font-medium">E-Mail</span>
         <span class="font-medium">LinkedIn</span>
         <span class="font-medium">Lebenslauf</span>
       </div>
       <div class="space-y-2">
         <div v-for="a in items" :key="a.id"
-          class="grid grid-cols-6 items-center text-sm bg-brand-light rounded-full px-6 py-3"
+          class="grid grid-cols-7 items-center text-sm bg-brand-light rounded-full px-6 py-3"
           :class="{ 'opacity-60': !a.emailConfirmed }">
           <span>{{ formatDate(a.createdAt) }}</span>
           <span>{{ a.firstName }}</span>
           <span>{{ a.lastName }}</span>
           <span>{{ a.areaOfWork }}</span>
+          <span>{{ a.email }}</span>
           <span>
             <a v-if="a.linkedinUrl" :href="a.linkedinUrl" target="_blank" class="text-brand font-semibold hover:underline">
               Profil anschauen

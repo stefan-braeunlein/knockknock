@@ -51,7 +51,7 @@ async function openCv(id: string) {
         <span class="font-medium">Datum</span>
         <span class="font-medium">Vorname</span>
         <span class="font-medium">Nachname</span>
-        <span class="font-medium">Einsatzbereich</span>
+        <span class="font-medium">Tätigkeitsbereich</span>
         <span class="font-medium">LinkedIn</span>
         <span class="font-medium">Lebenslauf</span>
       </div>

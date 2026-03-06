@@ -90,11 +90,20 @@ public static class ApplyEndpoints
         return Results.Content("""
             <!DOCTYPE html>
             <html lang="de">
-            <head><meta charset="UTF-8"><title>Bestätigt</title></head>
-            <body style="font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;background:#f1f5ff">
+            <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Bestätigt</title>
+              <style>
+                @font-face { font-family: 'Open Sans'; font-weight: 400; src: url(/fonts/open-sans-400-latin.woff2) format('woff2'); }
+                @font-face { font-family: 'Open Sans'; font-weight: 700; src: url(/fonts/open-sans-700-latin.woff2) format('woff2'); }
+              </style>
+            </head>
+            <body style="font-family:'Open Sans',sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;background:#f1f5ff">
               <div style="text-align:center">
-                <h1 style="color:#0b56cf">Danke!</h1>
-                <p style="color:#535d7f">Deine E-Mail-Adresse wurde erfolgreich bestätigt.</p>
+                <img src="/knock-knock-logo.svg" alt="Knock Knock" width="70" height="70" style="margin-bottom:20px">
+                <h1 style="color:#0b56cf;font-size:24px;font-weight:700;margin:0 0 12px">Erfolgreich bestätigt!</h1>
+                <p style="color:#535d7f;font-size:16px;margin:0;line-height:1.5">Deine Kontaktdaten wurden bei dem<br>Unternehmen aufgenommen.</p>
               </div>
             </body>
             </html>

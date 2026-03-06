@@ -49,6 +49,7 @@ app.UseCors(policy => policy
     .AllowAnyMethod()
     .AllowAnyHeader());
 
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 

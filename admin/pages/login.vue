@@ -3,6 +3,7 @@ definePageMeta({ layout: false })
 
 const { setAuth } = useAuth()
 const { apiFetch } = useApi()
+const route = useRoute()
 
 const email = ref('')
 const password = ref('')
@@ -18,7 +19,7 @@ async function handleLogin() {
       body: JSON.stringify({ email: email.value, password: password.value })
     })
     setAuth(data.token, data.role, data.tenantName)
-    navigateTo('/applicants')
+    navigateTo((route.query.redirect as string) || '/applicants')
   } catch {
     error.value = 'Ungültige Anmeldedaten.'
   } finally {

@@ -48,7 +48,7 @@ public static class ApplicantEndpoints
         return Results.Ok(applicants);
     }
 
-    private static async Task<IResult> ExportApplicants(HttpContext http, AppDbContext db, int year, int month)
+    private static async Task<IResult> ExportApplicants(HttpContext http, AppDbContext db, IConfiguration config, int year, int month)
     {
         var role = http.User.FindFirstValue(ClaimTypes.Role);
         var tenantClaim = http.User.FindFirstValue("tenant_id");
@@ -75,9 +75,12 @@ public static class ApplicantEndpoints
         ws.Cell(1, 4).Value = "Tätigkeitsbereich";
         ws.Cell(1, 5).Value = "E-Mail Adresse";
         ws.Cell(1, 6).Value = "LinkedIn";
+        ws.Cell(1, 7).Value = "Lebenslauf";
 
-        var headerRow = ws.Range(1, 1, 1, 6);
+        var headerRow = ws.Range(1, 1, 1, 7);
         headerRow.Style.Font.Bold = true;
+
+        var adminUrl = (config["AdminUrl"] ?? "https://getknockknock.de/admin").TrimEnd('/');
 
         for (var i = 0; i < applicants.Count; i++)
         {
@@ -89,6 +92,14 @@ public static class ApplicantEndpoints
             ws.Cell(row, 4).Value = a.AreaOfWork;
             ws.Cell(row, 5).Value = a.Email;
             ws.Cell(row, 6).Value = a.LinkedinUrl ?? "";
+            if (a.CvStorageKey is not null)
+            {
+                var cvUrl = $"{adminUrl}/cv/{a.Id}";
+                ws.Cell(row, 7).SetValue("Herunterladen");
+                ws.Cell(row, 7).SetHyperlink(new XLHyperlink(cvUrl));
+                ws.Cell(row, 7).Style.Font.FontColor = XLColor.FromHtml("#0B56CF");
+                ws.Cell(row, 7).Style.Font.Underline = XLFontUnderlineValues.Single;
+            }
         }
 
         ws.Columns().AdjustToContents();

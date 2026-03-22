@@ -295,22 +295,4 @@
 
     window.visualViewport.addEventListener("resize", adjustForKeyboard);
   }
-
-  // ── Scroll focused input into view within card ────────
-  var scrollCard = widget.querySelector(".kk-card");
-  widget.addEventListener(
-    "focus",
-    function (e) {
-      if (e.target.classList.contains("kk-input")) {
-        setTimeout(function () {
-          var inputRect = e.target.getBoundingClientRect();
-          var cardRect = scrollCard.getBoundingClientRect();
-          if (inputRect.bottom > cardRect.bottom - 10) {
-            scrollCard.scrollTop += inputRect.bottom - cardRect.bottom + 40;
-          }
-        }, 350);
-      }
-    },
-    true
-  );
 })();

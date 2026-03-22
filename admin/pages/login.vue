@@ -36,13 +36,11 @@ async function handleLogin() {
         <p class="text-gray-400 text-base">Initiativbewerbungen einfach, schnell und unkompliziert</p>
       </div>
       <form @submit.prevent="handleLogin" class="space-y-4">
-        <input v-model="email" type="email" placeholder="E-Mail" required
-          class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        <input v-model="password" type="password" placeholder="Passwort" required
-          class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <KkInput v-model="email" type="email" placeholder="E-Mail" required />
+        <KkInput v-model="password" type="password" placeholder="Passwort" required />
         <p v-if="error" class="text-red-500 text-sm">{{ error }}</p>
         <button type="submit" :disabled="loading"
-          class="w-full py-2 bg-brand text-white rounded-lg font-semibold hover:bg-blue-800 disabled:opacity-50">
+          class="w-full py-2 bg-brand text-white rounded-full font-semibold hover:bg-blue-800 disabled:opacity-50">
           {{ loading ? 'Laden...' : 'Anmelden' }}
         </button>
       </form>

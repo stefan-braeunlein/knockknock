@@ -8,7 +8,7 @@ const { isSuperAdmin, logout } = useAuth()
     <aside class="w-72 bg-brand-light p-6 flex flex-col h-screen sticky top-0">
       <div class="text-center mb-8">
         <img src="/knock-knock-logo.svg" alt="Knock Knock Logo" class="w-[100px] h-[100px] mx-auto mb-3" />
-        <p class="text-gray-500 text-sm mt-2">Initativbewerbungen einfach,<br>schnell und unkompliziert</p>
+        <p class="text-gray-400 text-base mt-2">Initiativbewerbungen einfach, schnell und unkompliziert</p>
       </div>
 
       <nav class="flex-1 space-y-1">
@@ -34,7 +34,7 @@ const { isSuperAdmin, logout } = useAuth()
 
       <div class="mt-auto">
         <button @click="logout"
-          class="flex items-center justify-center gap-2 text-gray-500 hover:text-gray-700 transition text-sm w-full">
+          class="flex items-center justify-center gap-2 text-gray-500 text-base hover:text-gray-700 transition w-full">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
           Logout
         </button>

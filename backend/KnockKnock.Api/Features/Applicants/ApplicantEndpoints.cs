@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using ClosedXML.Excel;
 using KnockKnock.Api.Data;
 using KnockKnock.Api.Data.Entities;
 using KnockKnock.Api.Services;
@@ -14,6 +15,7 @@ public static class ApplicantEndpoints
         var group = app.MapGroup("/api/applicants").RequireAuthorization();
 
         group.MapGet("/", GetApplicants);
+        group.MapGet("/export", ExportApplicants);
         group.MapGet("/{id:guid}/cv", GetCvUrl);
     }
 
@@ -44,6 +46,59 @@ public static class ApplicantEndpoints
         }).ToListAsync();
 
         return Results.Ok(applicants);
+    }
+
+    private static async Task<IResult> ExportApplicants(HttpContext http, AppDbContext db, int year, int month)
+    {
+        var role = http.User.FindFirstValue(ClaimTypes.Role);
+        var tenantClaim = http.User.FindFirstValue("tenant_id");
+
+        IQueryable<Applicant> query = db.Applicants
+            .Where(a => a.CreatedAt.Year == year && a.CreatedAt.Month == month)
+            .OrderByDescending(a => a.CreatedAt);
+
+        if (role == UserRole.CompanyUser.ToString() && Guid.TryParse(tenantClaim, out var tenantId))
+            query = query.Where(a => a.TenantId == tenantId);
+
+        if (role == UserRole.SuperAdmin.ToString() && http.Request.Query.TryGetValue("tenant_id", out var tid) && Guid.TryParse(tid, out var filterTid))
+            query = query.Where(a => a.TenantId == filterTid);
+
+        var applicants = await query.ToListAsync();
+
+        using var workbook = new XLWorkbook();
+        var monthName = new DateTime(year, month, 1).ToString("MMMM yyyy", new System.Globalization.CultureInfo("de-DE"));
+        var ws = workbook.Worksheets.Add(monthName);
+
+        ws.Cell(1, 1).Value = "Datum";
+        ws.Cell(1, 2).Value = "Vorname";
+        ws.Cell(1, 3).Value = "Nachname";
+        ws.Cell(1, 4).Value = "Tätigkeitsbereich";
+        ws.Cell(1, 5).Value = "E-Mail Adresse";
+        ws.Cell(1, 6).Value = "LinkedIn";
+
+        var headerRow = ws.Range(1, 1, 1, 6);
+        headerRow.Style.Font.Bold = true;
+
+        for (var i = 0; i < applicants.Count; i++)
+        {
+            var a = applicants[i];
+            var row = i + 2;
+            ws.Cell(row, 1).Value = a.CreatedAt.ToString("dd.MM.yyyy HH:mm") + " Uhr";
+            ws.Cell(row, 2).Value = a.FirstName;
+            ws.Cell(row, 3).Value = a.LastName;
+            ws.Cell(row, 4).Value = a.AreaOfWork;
+            ws.Cell(row, 5).Value = a.Email;
+            ws.Cell(row, 6).Value = a.LinkedinUrl ?? "";
+        }
+
+        ws.Columns().AdjustToContents();
+
+        var stream = new MemoryStream();
+        workbook.SaveAs(stream);
+        stream.Position = 0;
+
+        var fileName = $"Bewerbungen_{monthName.Replace(" ", "_")}.xlsx";
+        return Results.File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
     }
 
     private static async Task<IResult> GetCvUrl(Guid id, HttpContext http, AppDbContext db, StorageService storage)

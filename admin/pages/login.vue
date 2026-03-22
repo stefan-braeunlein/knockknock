@@ -28,11 +28,12 @@ async function handleLogin() {
 </script>
 
 <template>
-  <div class="min-h-screen bg-brand-light flex items-center justify-center">
-    <div class="bg-white rounded-2xl shadow-sm p-10 w-full max-w-sm">
+  <div class="min-h-screen relative flex items-center justify-center">
+    <img src="/login-bg.png" alt="" class="absolute inset-0 w-full h-full object-cover" />
+    <div class="relative bg-brand-light/90 rounded-2xl shadow-sm p-10 w-full max-w-sm">
       <div class="text-center mb-8">
-        <h1 class="text-2xl font-bold text-blue-900">Knock Knock</h1>
-        <p class="text-gray-500 text-sm mt-1">Admin Login</p>
+        <img src="/knock-knock-logo.svg" alt="Knock Knock Logo" class="w-[100px] h-[100px] mx-auto mb-5" />
+        <p class="text-gray-400 text-base">Initiativbewerbungen einfach, schnell und unkompliziert</p>
       </div>
       <form @submit.prevent="handleLogin" class="space-y-4">
         <input v-model="email" type="email" placeholder="E-Mail" required

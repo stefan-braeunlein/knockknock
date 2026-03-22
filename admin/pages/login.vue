@@ -30,7 +30,7 @@ async function handleLogin() {
 <template>
   <div class="min-h-screen relative flex items-center justify-center">
     <img src="/login-bg.png" alt="" class="absolute inset-0 w-full h-full object-cover" />
-    <div class="relative bg-brand-light/90 rounded-2xl shadow-sm p-10 w-full max-w-sm">
+    <div class="relative bg-brand-light/90 rounded-2xl shadow-sm p-6 sm:p-10 w-full max-w-sm mx-4 sm:mx-0">
       <div class="text-center mb-8">
         <img src="/knock-knock-logo.svg" alt="Knock Knock Logo" class="w-[100px] h-[100px] mx-auto mb-5" />
         <p class="text-gray-400 text-base">Initiativbewerbungen einfach, schnell und unkompliziert</p>

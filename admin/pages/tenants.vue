@@ -43,7 +43,7 @@ onMounted(load)
     <h1 class="text-[28px] leading-[38px] font-bold text-brand mb-6 decoration-2">Unternehmen</h1>
 
     <!-- Create form -->
-    <form @submit.prevent="create" class="flex gap-3 mb-8">
+    <form @submit.prevent="create" class="flex flex-col sm:flex-row gap-3 mb-8">
       <input v-model="newName" placeholder="Name" required
         class="px-4 py-2 border border-gray-200 rounded-lg flex-1" />
       <input v-model="newSlug" placeholder="Slug (für Widget)" required
@@ -54,7 +54,8 @@ onMounted(load)
     </form>
 
     <!-- Table -->
-    <table class="w-full text-sm">
+    <div class="overflow-x-auto">
+    <table class="w-full text-sm min-w-[500px]">
       <thead>
         <tr class="text-left text-gray-500 border-b">
           <th class="py-2 font-medium">Name</th>
@@ -80,5 +81,6 @@ onMounted(load)
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </template>

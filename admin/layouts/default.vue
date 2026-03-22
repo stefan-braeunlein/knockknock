@@ -1,11 +1,27 @@
 <script setup lang="ts">
 const { isSuperAdmin, logout } = useAuth()
+const sidebarOpen = ref(false)
+
+const route = useRoute()
+watch(() => route.path, () => { sidebarOpen.value = false })
 </script>
 
 <template>
   <div class="min-h-screen flex bg-brand-light">
+    <!-- Mobile overlay -->
+    <div v-if="sidebarOpen" class="fixed inset-0 bg-black/30 z-30 lg:hidden" @click="sidebarOpen = false" />
+
     <!-- Sidebar -->
-    <aside class="w-72 bg-brand-light p-6 flex flex-col h-screen sticky top-0">
+    <aside :class="[
+      'bg-brand-light p-6 flex flex-col h-screen z-40',
+      'fixed inset-y-0 left-0 w-72 transition-transform duration-200 lg:sticky lg:top-0 lg:translate-x-0',
+      sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+    ]">
+      <!-- Mobile close -->
+      <button class="lg:hidden mb-4 self-start text-brand" @click="sidebarOpen = false">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
       <div class="text-center mb-8">
         <img src="/knock-knock-logo.svg" alt="Knock Knock Logo" class="w-[100px] h-[100px] mx-auto mb-3" />
         <p class="text-gray-400 text-base mt-2">Initiativbewerbungen einfach, schnell und unkompliziert</p>
@@ -45,7 +61,11 @@ const { isSuperAdmin, logout } = useAuth()
     </aside>
 
     <!-- Main content -->
-    <main class="flex-1 p-8 bg-white min-h-screen overflow-y-auto">
+    <main class="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 bg-white min-h-screen overflow-y-auto">
+      <!-- Mobile hamburger -->
+      <button class="lg:hidden mb-4 text-brand" @click="sidebarOpen = true">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
       <slot />
     </main>
   </div>

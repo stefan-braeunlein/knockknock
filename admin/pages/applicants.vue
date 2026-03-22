@@ -73,34 +73,38 @@ async function downloadXlsx(year: number, month: number) {
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3"/></svg>
         </button>
       </div>
-      <div class="grid grid-cols-7 text-sm text-gray-500 px-4 mb-4">
-        <span class="font-medium">Datum</span>
-        <span class="font-medium">Vorname</span>
-        <span class="font-medium">Nachname</span>
-        <span class="font-medium">Tätigkeitsbereich</span>
-        <span class="font-medium">E-Mail Adresse</span>
-        <span class="font-medium">LinkedIn</span>
-        <span class="font-medium">Lebenslauf</span>
-      </div>
-      <div class="space-y-2">
-        <div v-for="a in group.items" :key="a.id"
-          class="grid grid-cols-7 items-center text-sm bg-brand-light rounded-full px-6 py-4"
-          :class="{ 'opacity-60': !a.emailConfirmed }">
-          <span>{{ formatDate(a.createdAt) }}</span>
-          <span>{{ a.firstName }}</span>
-          <span>{{ a.lastName }}</span>
-          <span>{{ a.areaOfWork }}</span>
-          <span>{{ a.email }}</span>
-          <span>
-            <a v-if="a.linkedinUrl" :href="a.linkedinUrl" target="_blank" class="text-brand hover:text-brand/80 transition" title="LinkedIn Profil">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            </a>
-          </span>
-          <span>
-            <button v-if="a.hasCv" class="text-brand hover:text-brand/80 transition" @click="openCv(a.id)" title="Lebenslauf anschauen">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            </button>
-          </span>
+      <div class="overflow-x-auto">
+        <div class="min-w-[700px]">
+          <div class="grid grid-cols-7 text-sm text-gray-500 px-4 mb-4">
+            <span class="font-medium">Datum</span>
+            <span class="font-medium">Vorname</span>
+            <span class="font-medium">Nachname</span>
+            <span class="font-medium">Tätigkeitsbereich</span>
+            <span class="font-medium">E-Mail Adresse</span>
+            <span class="font-medium text-center">LinkedIn</span>
+            <span class="font-medium text-center">Lebenslauf</span>
+          </div>
+          <div class="space-y-2">
+            <div v-for="a in group.items" :key="a.id"
+              class="grid grid-cols-7 items-center text-sm bg-brand-light rounded-full px-6 py-4"
+              :class="{ 'opacity-60': !a.emailConfirmed }">
+              <span>{{ formatDate(a.createdAt) }}</span>
+              <span>{{ a.firstName }}</span>
+              <span>{{ a.lastName }}</span>
+              <span>{{ a.areaOfWork }}</span>
+              <span>{{ a.email }}</span>
+              <span class="flex justify-center">
+                <a v-if="a.linkedinUrl" :href="a.linkedinUrl" target="_blank" class="text-brand hover:text-brand/80 transition" title="LinkedIn Profil">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </a>
+              </span>
+              <span class="flex justify-center">
+                <button v-if="a.hasCv" class="text-brand hover:text-brand/80 transition" @click="openCv(a.id)" title="Lebenslauf anschauen">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </button>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
